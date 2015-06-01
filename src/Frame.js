@@ -1,10 +1,10 @@
 function Frame() {
-  this.goCount = 2;
+  this.goCount = 0;
   this.standingPins = 10;
 }
 
 Frame.prototype.registerGo = function(pinCount) {
-  this.goCount -= 1;
+  this.goCount += 1;
   this.standingPins -= pinCount;
 }
 
@@ -13,6 +13,10 @@ Frame.prototype.remainingPins = function() {
 };
 
 Frame.prototype.isOver = function() {
-  return (this.goCount === 0);
+  return (this.goCount === 2 || this.standingPins === 0 );
+};
+
+Frame.prototype.total = function() {
+  return 10 - this.standingPins;
 };
 
