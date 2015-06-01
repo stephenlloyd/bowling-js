@@ -1,6 +1,5 @@
 function Frame(options ) {
   this.goCount = 0;
-  console.log(options);
   this.startingPins = options.pins;
   this.standingPins = options.pins;
   this.maximumRolls = options.rolls;
