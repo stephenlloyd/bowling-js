@@ -1,8 +1,10 @@
-function Frame(maximumRolls, startingPins ) {
+function Frame(options ) {
   this.goCount = 0;
-  this.startingPins = startingPins;
-  this.standingPins = startingPins;
-  this.maximumRolls = maximumRolls;
+  console.log(options);
+  this.startingPins = options.pins;
+  this.standingPins = options.pins;
+  this.maximumRolls = options.rolls;
+  this.isLastFrame = options.isLastFrame;
 }
 
 Frame.prototype.registerGo = function(pinCount) {

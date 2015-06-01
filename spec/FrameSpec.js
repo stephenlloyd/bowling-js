@@ -2,7 +2,7 @@ describe("Frame", function() {
   var frame;
 
   beforeEach(function() {
-    frame = new Frame(2, 10);
+    frame = new Frame({rolls: 2, pins: 10, isLastframe : false });
   });
 
   it("registers a gutter ball", function() {
@@ -67,10 +67,15 @@ describe("Frame", function() {
     expect(frame.isSpare()).toEqual(true);
   });
 
-    it("knows if there is not a spare", function(){
+  it("knows if there is not a spare", function(){
     frame.registerGo(4);
     frame.registerGo(1);
     expect(frame.isSpare()).toEqual(false);
+  });
+
+  it("knows if its part of the last frame", function(){
+      var frame = new Frame({rolls: 2, pins: 10, isLastFrame : true })
+      expect(frame.isLastFrame).toEqual(true)
   });
 
 });
