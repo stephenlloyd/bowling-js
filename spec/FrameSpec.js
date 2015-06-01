@@ -2,7 +2,7 @@ describe("Frame", function() {
   var frame;
 
   beforeEach(function() {
-    frame = new Frame();
+    frame = new Frame(2, 10);
   });
 
   it("registers a gutter ball", function() {
@@ -44,6 +44,33 @@ describe("Frame", function() {
     frame.registerGo(3);
     frame.registerGo(3);
     expect(frame.total()).toEqual(6);
+  });
+
+  it("wont let a go be registered when i frame is over", function(){
+    frame.registerGo(10);
+    expect(function(){frame.registerGo(10)}).toThrow("Frame is over")
+  });
+
+  it("knows if there is a strike", function(){
+    frame.registerGo(10);
+    expect(frame.isStrike()).toEqual(true);
+  });
+
+  it("knows if there is not a strike", function(){
+    frame.registerGo(6);
+    expect(frame.isStrike()).toEqual(false);
+  });
+
+  it("knows if there is a spare", function(){
+    frame.registerGo(9);
+    frame.registerGo(1);
+    expect(frame.isSpare()).toEqual(true);
+  });
+
+    it("knows if there is not a spare", function(){
+    frame.registerGo(4);
+    frame.registerGo(1);
+    expect(frame.isSpare()).toEqual(false);
   });
 
 });

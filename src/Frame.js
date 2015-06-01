@@ -1,11 +1,18 @@
-function Frame() {
+function Frame(maximumRolls, startingPins ) {
   this.goCount = 0;
-  this.standingPins = 10;
+  this.startingPins = startingPins;
+  this.standingPins = startingPins;
+  this.maximumRolls = maximumRolls;
 }
 
 Frame.prototype.registerGo = function(pinCount) {
+  if(this.isOver()){throw("Frame is over")};
   this.goCount += 1;
   this.standingPins -= pinCount;
+}
+
+Frame.prototype.isAllPinsKnockedDown = function(){
+ return this.standingPins === 0;
 }
 
 Frame.prototype.remainingPins = function() {
@@ -13,10 +20,17 @@ Frame.prototype.remainingPins = function() {
 };
 
 Frame.prototype.isOver = function() {
-  return (this.goCount === 2 || this.standingPins === 0 );
+  return (this.goCount === this.maximumRolls || this.isAllPinsKnockedDown() );
 };
 
 Frame.prototype.total = function() {
-  return 10 - this.standingPins;
+  return this.startingPins - this.standingPins;
 };
 
+Frame.prototype.isStrike = function(){
+  return (this.goCount === 1 && this.isAllPinsKnockedDown())
+};
+
+Frame.prototype.isSpare = function(){
+  return (this.goCount === this.maximumRolls && this.isAllPinsKnockedDown())
+};
